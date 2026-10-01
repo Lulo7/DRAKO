@@ -39,6 +39,7 @@
     font-family: Arial, sans-serif;
     font-size: 12px;
     box-shadow: none;
+    transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 
 .tarjeta-datos .form-control:focus {

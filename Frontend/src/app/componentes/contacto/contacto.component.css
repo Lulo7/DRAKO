@@ -131,6 +131,7 @@
   font-family: Arial, sans-serif;
   font-size: 12px;
   box-shadow: none;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 
 .form-group .form-control::placeholder {
@@ -160,6 +161,18 @@
   font-weight: 600;
   letter-spacing: 1.2px;
   cursor: not-allowed;
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.send-button:not(:disabled) {
+  cursor: pointer;
+  border-color: #282622;
+  background: #282622;
+}
+
+.send-button:not(:disabled):hover {
+  border-color: #a17c4b;
+  background: #a17c4b;
 }
 
 .form-note {

@@ -80,12 +80,13 @@ div#areatrabajo {
     box-shadow: 0 12px 30px rgba(36, 33, 29, 0.25);
     cursor: pointer;
     z-index: 1030;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 
 .btnNuevo:hover {
     background: #a17c4b;
     border-color: #a17c4b;
+    transform: translateY(-3px);
 }
 
 /* =========================================================
@@ -393,6 +394,7 @@ div#areatrabajo {
     font-family: Arial, sans-serif;
     font-size: 12px;
     box-shadow: none;
+    transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
 
 .admin-modal textarea.form-control {
