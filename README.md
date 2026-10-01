@@ -75,12 +75,6 @@ La aplicación queda disponible en `http://localhost:4200`.
 | Frontend | `npm run watch` | Build en watch (desarrollo) |
 | Frontend | `npm test` | Tests unitarios (Karma/Jasmine) |
 
-## Notas
-
-- `Backend/config.js` contiene credenciales reales y está ignorado por git. Nunca lo subas al repositorio; usa `config.example.js` como plantilla.
-- Las carpetas `Avatares/`, `Productos/`, `Relojes/` y `Documentos/` almacenan archivos subidos por usuarios en tiempo de ejecución; se ignoran en git y solo se conserva el `.gitkeep`.
-- `node_modules/`, `dist/` y `.angular/` también están ignorados.
-
 ## Licencia
 
 ISC
