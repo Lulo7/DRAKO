@@ -1,3 +1,45 @@
+/* =========================================================
+   Base: tokens de movimiento y fluidez global
+   ========================================================= */
+:root {
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-fast: 0.2s;
+    --dur: 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: var(--dur);
+    animation-timing-function: var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   Fin base
+   ========================================================= */
+
 div#areatrabajo {
     display: flex;
     flex-direction: row-reverse;
