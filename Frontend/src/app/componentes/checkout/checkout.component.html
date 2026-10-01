@@ -1,0 +1,293 @@
+<app-header></app-header>
+
+<main class="checkout-page">
+
+    <!-- Encabezado -->
+    <section class="checkout-hero">
+        <div class="container">
+            <p class="eyebrow">DRAKO / COMPRA</p>
+            <h1>Finaliza tu compra</h1>
+            <p>
+                Confirma dónde recibirás tu pedido y revisa los relojes
+                que seleccionaste.
+            </p>
+        </div>
+    </section>
+
+    <section class="container checkout-container">
+
+        <div class="checkout-title">
+            <div>
+                <p class="eyebrow">ÚLTIMO PASO</p>
+                <h2>Tu pedido</h2>
+            </div>
+
+            <span class="secure-label">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+                Compra segura
+            </span>
+        </div>
+
+        <div class="checkout-layout">
+
+            <!-- Selección de dirección -->
+            <section class="checkout-panel address-panel">
+
+                <div class="panel-heading">
+                    <div class="heading-text">
+                        <span class="step-number">01</span>
+                        <h3>Dirección de entrega</h3>
+                        <p>Selecciona dónde deseas recibir tu pedido.</p>
+                    </div>
+
+                    <button type="button" class="add-address-button" (click)="Nuevo()">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        Nueva dirección
+                    </button>
+                </div>
+
+                <div class="no-addresses" *ngIf="datosDirecciones.length === 0">
+                    <div class="empty-icon">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    </div>
+                    <h4>Aún no tienes direcciones guardadas</h4>
+                    <p>Agrega una dirección para indicar dónde recibir tu pedido.</p>
+
+                    <button type="button" class="empty-add-button" (click)="Nuevo()">
+                        Agregar dirección
+                    </button>
+                </div>
+
+                <div class="address-list" *ngIf="datosDirecciones.length > 0">
+                    <label class="address-card" *ngFor="let item of datosDirecciones"
+                        [class.selected]="idseleccionado === item._id">
+                        <input type="radio" name="direccionEntrega" [value]="item._id" [(ngModel)]="idseleccionado" />
+
+                        <span class="radio-custom" aria-hidden="true"></span>
+
+                        <span class="address-content">
+                            <span class="address-alias">
+                                {{ item.alias || 'Mi dirección' }}
+                            </span>
+
+                            <span class="address-line">
+                                {{ item.direccion }}
+                            </span>
+
+                            <span class="address-location">
+                                {{ item.municipio }}, {{ item.departamento }}
+                            </span>
+
+                            <span class="address-postal" *ngIf="item.codigopostal">
+                                Código postal: {{ item.codigopostal }}
+                            </span>
+                        </span>
+
+                        <i class="fas fa-map-marker-alt address-icon" aria-hidden="true"></i>
+                    </label>
+                </div>
+
+            </section>
+
+            <!-- Resumen del carrito -->
+            <aside class="checkout-panel order-panel">
+
+                <div class="panel-heading order-heading">
+                    <div class="heading-text">
+                        <span class="step-number">02</span>
+                        <h3>Resumen del pedido</h3>
+                        <p>Verifica los productos y las cantidades.</p>
+                    </div>
+                </div>
+
+                <div class="order-items" *ngIf="carritoService.listacarrito.length > 0">
+                    <article class="order-item" *ngFor="let item of carritoService.listacarrito">
+                        <div class="item-image">
+                            <img [src]="peticion.dominioavatar + '/Productos/' + item.idproducto + '.png'"
+                                [alt]="item.nombre || 'Reloj DRAKO'" />
+                        </div>
+
+                        <div class="item-details">
+                            <h4>{{ item.nombre || 'Reloj sin nombre' }}</h4>
+
+                            <p class="item-brand">
+                                {{ item.marca || 'DRAKO' }}
+                            </p>
+
+                            <span class="item-reference" *ngIf="item.codigo">
+                                Ref. {{ item.codigo }}
+                            </span>
+
+                            <span class="item-quantity">
+                                Cantidad: {{ item.cantidad }}
+                            </span>
+
+                            <span class="item-discount" *ngIf="item.descuento > 0">
+                                {{ item.descuento }}% de descuento
+                            </span>
+                        </div>
+
+                        <div class="item-price">
+                            <span class="item-final-price">
+                                {{
+                                (
+                                item.precio * item.cantidad -
+                                (item.precio * item.descuento / 100 * item.cantidad)
+                                ) | currency:'COP':'symbol':'1.0-0'
+                                }}
+                            </span>
+
+                            <span class="item-original-price" *ngIf="item.descuento > 0">
+                                {{
+                                (item.precio * item.cantidad)
+                                | currency:'COP':'symbol':'1.0-0'
+                                }}
+                            </span>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="empty-cart" *ngIf="carritoService.listacarrito.length === 0">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                    <h4>Tu carrito está vacío</h4>
+                    <p>Agrega algún reloj antes de continuar con tu compra.</p>
+                    <a routerLink="/catalogo">Explorar relojes</a>
+                </div>
+
+                <div class="order-totals" *ngIf="carritoService.listacarrito.length > 0">
+                    <div class="total-row">
+                        <span>Subtotal</span>
+                        <span>
+                            {{
+                            carritoService.subtotal
+                            | currency:'COP':'symbol':'1.0-0'
+                            }}
+                        </span>
+                    </div>
+
+                    <div class="total-row">
+                        <span>Descuentos</span>
+                        <span class="discount-value">
+                            -{{
+                            carritoService.descuentos
+                            | currency:'COP':'symbol':'1.0-0'
+                            }}
+                        </span>
+                    </div>
+
+                    <div class="total-row">
+                        <span>Envío</span>
+                        <span class="shipping-note">Por confirmar</span>
+                    </div>
+
+                    <div class="total-row grand-total">
+                        <span>Total estimado</span>
+                        <span>
+                            {{
+                            carritoService.grantotal
+                            | currency:'COP':'symbol':'1.0-0'
+                            }}
+                        </span>
+                    </div>
+
+                    <p class="total-disclaimer">
+                        El costo de envío, si aplica, se confirmará antes de finalizar
+                        el pedido.
+                    </p>
+                </div>
+
+                <button type="button" class="buy-button" [disabled]="
+            !idseleccionado ||
+            carritoService.listacarrito.length === 0
+          " (click)="Comprar()">
+                    Continuar con la compra
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </button>
+
+                <a routerLink="/carrito" class="back-to-cart">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    Volver al carrito
+                </a>
+
+            </aside>
+        </div>
+    </section>
+</main>
+
+<!-- Modal para agregar una dirección -->
+<div class="modal fade" id="nuevoregistro" tabindex="-1" role="dialog" aria-labelledby="nuevaDireccionTitulo"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content address-modal">
+
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">LIBRETA DE DIRECCIONES</p>
+                    <h3 class="modal-title" id="nuevaDireccionTitulo">
+                        Nueva dirección
+                    </h3>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="alias">Alias de la dirección</label>
+                    <input id="alias" type="text" class="form-control" [(ngModel)]="alias"
+                        placeholder="Ej. Casa, Trabajo" />
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input id="direccion" type="text" class="form-control" [(ngModel)]="direccion"
+                        placeholder="Calle, carrera, número, apartamento..." />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="departamento">Departamento</label>
+                        <input id="departamento" type="text" class="form-control" [(ngModel)]="departamento"
+                            placeholder="Departamento" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="municipio">Municipio</label>
+                        <input id="municipio" type="text" class="form-control" [(ngModel)]="municipio"
+                            placeholder="Municipio" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="codigopostal">Código postal</label>
+                        <input id="codigopostal" type="text" class="form-control" [(ngModel)]="codigopostal"
+                            placeholder="Código postal" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="codigo">Código</label>
+                        <input id="codigo" type="text" class="form-control" [(ngModel)]="codigo" placeholder="Código" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="modal-cancel" data-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button type="button" class="modal-save" (click)="Guardar()">
+                    Guardar dirección
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

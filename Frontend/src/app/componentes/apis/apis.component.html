@@ -1,0 +1,85 @@
+<div class="contenedor">
+    <app-menulateral></app-menulateral>
+    <div class="areatrabajo pagina-admin">
+        <header class="encabezado-pagina">
+            <p class="eyebrow">ADMINISTRACIÓN</p>
+            <h1>Apis</h1>
+            <p class="descripcion">Catálogo de endpoints disponibles y su tipo de acceso.</p>
+        </header>
+
+        <div class="tabla-envoltura">
+            <table class="tabla-admin">
+                <thead>
+                    <tr>
+                        <th scope="col">Path</th>
+                        <th scope="col">Método</th>
+                        <th scope="col">Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of datos" (click)="Editar(item._id)">
+                        <td class="celda-nombre">{{item.path}}</td>
+                        <td class="celda-codigo">{{item.metodo}}</td>
+                        <td>
+                            <span class="etiqueta-estado"
+                                [ngClass]="item.tipo == 'Publico' ? 'estado-activo' : 'estado-inactivo'">{{item.tipo}}</span>
+                        </td>
+                    </tr>
+                    <tr class="vacio" *ngIf="datos.length === 0">
+                        <td colspan="3">No hay apis registradas todavía.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btnNuevo" (click)="Nuevo()" role="button" title="Nueva api">+</div>
+    </div>
+</div>
+
+<div class="modal fade admin-modal" id="nuevoregistro" tabindex="-1" aria-labelledby="tituloModalApis"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">REGISTRO</p>
+                    <h5 class="modal-title" id="tituloModalApis">Apis</h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="path">Path</label>
+                    <input type="text" class="form-control" id="path" [(ngModel)]="path"
+                        [disabled]="idseleccionado != ''">
+                </div>
+                <div class="form-group">
+                    <label for="metodo">Método</label>
+                    <input type="text" class="form-control" id="metodo" [(ngModel)]="metodo"
+                        [disabled]="idseleccionado != ''">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" id="descripcion" rows="3" [(ngModel)]="descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select class="form-control" id="tipo" [(ngModel)]="tipo">
+                        <option value="Publico">Publico</option>
+                        <option value="Privado">Privado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="Guardar()"
+                    *ngIf="idseleccionado == ''">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="Actualizar()"
+                    *ngIf="idseleccionado != ''">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="Eliminar()"
+                    *ngIf="idseleccionado != ''">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  background-color: #f6f5f2;
+  color: #282622;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 45px 18px;
+}
+
+#activarcuenta {
+  width: 100%;
+  max-width: 460px;
+  padding: 38px 42px;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(40, 38, 34, 0.06);
+  text-align: center;
+}
+
+#activarcuenta h3 {
+  margin: 20px 0 14px;
+  color: #282622;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.mensaje {
+  margin: 0 0 24px;
+  color: #68635c;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.icono-estado {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.icono-estado.exito {
+  background-color: #e8f3eb;
+  color: #328253;
+}
+
+.icono-estado.error {
+  background-color: #f8e9e6;
+  color: #b34e43;
+}
+
+.icono-estado.cargando {
+  background-color: #f1ede7;
+}
+
+.spinner {
+  width: 27px;
+  height: 27px;
+  border: 3px solid #ded6ca;
+  border-top-color: #a17c4b;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-primary {
+  width: 100%;
+  min-height: 45px;
+  padding: 10px 16px;
+  border: 1px solid #282622;
+  border-radius: 4px;
+  background-color: #282622;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border-color: #a17c4b;
+  background-color: #a17c4b;
+  color: #fff;
+}
+
+.enlace-login {
+  display: inline-block;
+  color: #8b693f;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.enlace-login:hover {
+  color: #a17c4b;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  #activarcuenta {
+    padding: 30px 22px;
+  }
+
+  #activarcuenta h3 {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="container">
+  <div id="activarcuenta">
+    <div class="icono-estado" [ngClass]="{
+      'exito': activacionCompleta,
+      'error': !procesando && !activacionCompleta,
+      'cargando': procesando
+    }">
+      <span *ngIf="procesando" class="spinner"></span>
+      <span *ngIf="activacionCompleta">✓</span>
+      <span *ngIf="!procesando && !activacionCompleta">!</span>
+    </div>
+
+    <h3 *ngIf="procesando">Activando tu cuenta</h3>
+    <h3 *ngIf="activacionCompleta">¡Cuenta activada!</h3>
+    <h3 *ngIf="!procesando && !activacionCompleta">No se pudo activar la cuenta</h3>
+
+    <p class="mensaje">{{ mensaje }}</p>
+
+    <button
+      *ngIf="activacionCompleta"
+      type="button"
+      class="btn btn-primary"
+      (click)="irAlLogin()"
+    >
+      Iniciar sesión
+    </button>
+
+    <a
+      *ngIf="!procesando && !activacionCompleta"
+      class="enlace-login"
+      routerLink="/login"
+    >
+      Volver al inicio de sesión
+    </a>
+  </div>
+</div>
+
+<app-footer></app-footer>

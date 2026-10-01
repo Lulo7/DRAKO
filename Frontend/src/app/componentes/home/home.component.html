@@ -1,0 +1,211 @@
+<app-header></app-header>
+
+<main class="home">
+
+  <!-- BANNER PRINCIPAL -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">EL ARTE DE MEDIR EL TIEMPO</p>
+
+      <h1>El tiempo es<br>una obra de arte.</h1>
+
+      <p class="hero-description">
+        Descubre una colección donde la precisión,
+        la elegancia y la tradición se encuentran.
+      </p>
+
+      <a routerLink="/catalogo" class="btn btn-light">
+        DESCUBRIR RELOJES
+      </a>
+    </div>
+  </section>
+
+  <!-- INTRODUCCIÓN -->
+  <section class="intro">
+    <p class="eyebrow">UNA EXPRESIÓN DE DISTINCIÓN</p>
+
+    <h2>La elegancia está en los detalles.</h2>
+
+    <p>
+      Cada reloj cuenta una historia. Explora piezas diseñadas
+      para acompañarte en los momentos que hacen la diferencia.
+    </p>
+  </section>
+
+  <!-- COLECCIONES -->
+  <section class="collections" id="colecciones">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">EXPLORA NUESTRO UNIVERSO</p>
+        <h2>Nuestros relojes</h2>
+      </div>
+
+      <a routerLink="/catalogo" class="text-link">
+        VER CATÁLOGO →
+      </a>
+    </div>
+
+    <div class="collection-grid">
+
+      <a routerLink="/catalogo" class="collection-card">
+        <img
+          src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=900"
+          alt="Reloj clásico de estilo elegante"
+          loading="lazy">
+
+        <div class="collection-overlay">
+          <span>ESTILO ATEMPORAL</span>
+          <h3>Clásicos</h3>
+          <span class="collection-link">EXPLORAR →</span>
+        </div>
+      </a>
+
+      <a routerLink="/catalogo" class="collection-card">
+        <img
+          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900"
+          alt="Reloj de diseño moderno"
+          loading="lazy">
+
+        <div class="collection-overlay">
+          <span>DISEÑO CONTEMPORÁNEO</span>
+          <h3>Modernos</h3>
+          <span class="collection-link">EXPLORAR →</span>
+        </div>
+      </a>
+
+      <a routerLink="/catalogo" class="collection-card">
+        <img
+          src="https://images.unsplash.com/photo-1539874754764-5a96559165b0?w=900"
+          alt="Reloj de pulsera con diseño deportivo"
+          loading="lazy">
+
+        <div class="collection-overlay">
+          <span>PRECISIÓN EN MOVIMIENTO</span>
+          <h3>Deportivos</h3>
+          <span class="collection-link">EXPLORAR →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="featured">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">SELECCIÓN EXCLUSIVA</p>
+        <h2>Relojes destacados</h2>
+      </div>
+
+      <a routerLink="/catalogo" class="text-link">
+        VER CATÁLOGO →
+      </a>
+    </div>
+
+    <div class="product-grid" *ngIf="!cargando && datos.length > 0">
+      <ng-container *ngFor="let item of datos | slice:0:4">
+        <article class="product-card">
+
+          <a
+            [routerLink]="['/detalles', item._id]"
+            class="product-image"
+            [attr.aria-label]="'Ver detalles de ' + item.nombre">
+            <span class="product-badge" *ngIf="item.descuento > 0">
+              OFERTA
+            </span>
+
+            <img
+              [src]="peticion.dominioavatar + '/Productos/' + item._id + '.png?v=' + random"
+              [alt]="item.nombre || 'Reloj DRAKO'"
+              loading="lazy"
+              (error)="imagenNoDisponible($event)">
+          </a>
+
+          <div class="product-info">
+            <p class="product-category">
+              {{ item.marca || 'DRAKO' }}
+            </p>
+
+            <h3>
+              <a [routerLink]="['/detalles', item._id]">
+                {{ item.nombre || 'Reloj sin nombre' }}
+              </a>
+            </h3>
+
+            <p class="product-description">
+              {{ item.descripcion }}
+            </p>
+
+            <div class="product-bottom">
+              <span class="product-price">
+                {{ item.precio | currency:'COP':'symbol':'1.0-0' }}
+              </span>
+
+              <a
+                [routerLink]="['/detalles', item._id]"
+                class="product-view">
+                VER DETALLES →
+              </a>
+            </div>
+          </div>
+
+        </article>
+      </ng-container>
+    </div>
+
+    <div class="empty-products" *ngIf="cargando">
+      <p>Cargando relojes destacados…</p>
+    </div>
+
+    <div class="empty-products" *ngIf="!cargando && datos.length === 0">
+      <p>Estamos preparando nuestra selección de relojes.</p>
+      <a routerLink="/catalogo" class="text-link">VER CATÁLOGO →</a>
+    </div>
+  </section>
+
+  <!-- HISTORIA DE LA MARCA -->
+  <section class="story">
+    <div class="story-image"></div>
+
+    <div class="story-content">
+      <p class="eyebrow">PRECISIÓN Y TRADICIÓN</p>
+
+      <h2>Más que un reloj,<br>una herencia.</h2>
+
+      <p>
+        Una combinación de diseño atemporal, materiales
+        seleccionados y pasión por la relojería.
+      </p>
+
+      <a routerLink="/nosotros" class="btn btn-dark">
+        CONOCE NUESTRA HISTORIA
+      </a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <p class="eyebrow">MANTENTE AL DÍA</p>
+
+    <h2>El tiempo trae novedades.</h2>
+
+    <p>
+      Suscríbete para conocer nuestras nuevas colecciones.
+    </p>
+
+    <!-- Formulario visual; aún no está conectado a un servicio -->
+    <div class="newsletter-form">
+      <input
+        type="email"
+        placeholder="Tu correo electrónico"
+        aria-label="Tu correo electrónico">
+
+      <button type="button" disabled>
+        PRÓXIMAMENTE
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,164 @@
+:host {
+    display: block;
+}
+
+.rejilla-cuenta {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.tarjeta-clave {
+    max-width: 560px;
+}
+
+.tarjeta-datos .form-group {
+    position: relative;
+    margin-bottom: 19px;
+}
+
+.tarjeta-datos .form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #4c4842;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.tarjeta-datos .form-control {
+    width: 100%;
+    height: 44px;
+    padding: 10px 42px 10px 13px;
+    border: 1px solid #dedad4;
+    border-radius: 0;
+    background: #fff;
+    color: #282622;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    box-shadow: none;
+}
+
+.tarjeta-datos .form-control:focus {
+    border-color: #a17c4b;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(161, 124, 75, 0.1);
+}
+
+.form-group .validar {
+    position: absolute;
+    right: 13px;
+    top: 31px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    pointer-events: none;
+}
+
+.form-group .validar.ok {
+    background: #a17c4b;
+}
+
+.form-group .validar.fail {
+    background: #b34e48;
+}
+
+.form-group .validar.ok::after {
+    content: "✓";
+}
+
+.form-group .validar.fail::after {
+    content: "X";
+}
+
+.condiciones {
+    position: relative;
+    margin-bottom: 7px;
+    padding: 0 0 5px 32px;
+    color: #817b73;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.condiciones::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.condiciones.fail::before {
+    content: "X";
+    border: 1px solid #d9c3c1;
+    background: #fff;
+    color: #b34e48;
+}
+
+.condiciones.ok::before {
+    content: "✓";
+    border: 1px solid #a17c4b;
+    background: #a17c4b;
+    color: #fff;
+}
+
+.condiciones.ok {
+    color: #4c4842;
+}
+
+.btn-guardar {
+    margin-top: 14px;
+    width: 100%;
+}
+
+.listado-recomendaciones {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #eeeae5;
+}
+
+.listado-recomendaciones li {
+    position: relative;
+    padding: 13px 0 13px 22px;
+    border-bottom: 1px solid #eeeae5;
+    color: #4c4842;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.listado-recomendaciones li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 19px;
+    width: 6px;
+    height: 6px;
+    background: #a17c4b;
+}
+
+.listado-recomendaciones li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 900px) {
+    .rejilla-cuenta {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,132 @@
+<app-header></app-header>
+
+<main class="product-detail-page">
+  <div class="container">
+    <nav class="breadcrumb-custom" aria-label="Ruta de navegación">
+      <a routerLink="/">Inicio</a>
+      <span>/</span>
+      <a routerLink="/catalogo">Relojes</a>
+      <span>/</span>
+      <span>{{ nombre || 'Detalle' }}</span>
+    </nav>
+
+    <div class="product-status" role="status" *ngIf="cargando">
+      Cargando la información del producto…
+    </div>
+
+    <div class="product-status product-status-error" *ngIf="cargofallo">
+      <p>No se pudo cargar la información del producto.</p>
+      <a routerLink="/catalogo">Volver al catálogo</a>
+    </div>
+
+    <section class="product-detail" *ngIf="cargado">
+      <div class="product-photo">
+        <div class="main-photo">
+          <img [src]="imagenPrincipal || imagenRespaldo" [alt]="nombre || 'Reloj DRAKO'"
+            (error)="ErrorImagenPrincipal()">
+        </div>
+
+        <div class="photo-thumbnails">
+          <button type="button" class="thumbnail" [class.selected]="imagenPrincipal.includes('/Productos/')" (click)="SeleccionarImagen(
+        peticion.dominioavatar + '/Productos/' +
+        idseleccionado + '.png?v=' + random2
+      )" aria-label="Ver imagen de portada">
+            <img [src]="peticion.dominioavatar + '/Productos/' + idseleccionado + '.png?v=' + random2"
+              [alt]="nombre + ' portada'" (error)="ErrorMiniatura($event)">
+          </button>
+
+          <button type="button" class="thumbnail" *ngFor="let item of datosimagenes"
+            [class.selected]="imagenPrincipal.includes('/Relojes/' + item.nombre + '.png')" (click)="SeleccionarImagen(
+        peticion.dominioavatar + '/Relojes/' +
+        item.nombre + '.png?v=' + random2
+      )" [attr.aria-label]="'Ver imagen adicional de ' + nombre">
+            <img [src]="peticion.dominioavatar + '/Relojes/' + item.nombre + '.png?v=' + random2"
+              [alt]="nombre + ' imagen adicional'" loading="lazy" (error)="ErrorMiniatura($event)">
+          </button>
+        </div>
+      </div>
+
+      <div class="product-information">
+        <p class="eyebrow">{{ marca || 'DRAKO' }}</p>
+
+        <h1>{{ nombre }}</h1>
+
+        <p class="product-code" *ngIf="codigo">
+          Referencia: {{ codigo }}
+        </p>
+
+        <div class="product-price">
+          {{ precio | currency:'COP':'symbol':'1.0-0' }}
+        </div>
+
+        <p class="product-description" *ngIf="descripcion">
+          {{ descripcion }}
+        </p>
+
+        <div class="product-stock" *ngIf="cantidad">
+          <span class="stock-dot"></span>
+          Disponibles: {{ cantidad }}
+        </div>
+
+        <div class="purchase-controls">
+          <label for="unidades">Cantidad</label>
+
+          <select id="unidades" class="form-control quantity-select" [(ngModel)]="unidadescompra"
+            [disabled]="listaunidades.length === 0">
+            <option *ngFor="let unidad of listaunidades" [ngValue]="unidad">
+              {{ unidad }}
+            </option>
+          </select>
+
+          <button type="button" class="btn-add-cart" (click)="AddCar(idseleccionado)"
+            [disabled]="listaunidades.length === 0 || unidadescompra < 1">
+            AGREGAR AL CARRITO
+          </button>
+        </div>
+
+        <div class="product-specifications">
+          <h2>Características</h2>
+
+          <dl>
+            <ng-container *ngIf="movimiento">
+              <dt>Movimiento</dt>
+              <dd>{{ movimiento }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="calibre">
+              <dt>Calibre</dt>
+              <dd>{{ calibre }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="material">
+              <dt>Material</dt>
+              <dd>{{ material }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="pulso">
+              <dt>Correa</dt>
+              <dd>{{ pulso }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="caja">
+              <dt>Caja</dt>
+              <dd>{{ caja }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="indicacion">
+              <dt>Indicaciones</dt>
+              <dd>{{ indicacion }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="departamento">
+              <dt>Categoría</dt>
+              <dd>{{ departamento }}</dd>
+            </ng-container>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,32 @@
+<header class="site-header">
+  <div class="header-inner">
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir o cerrar menú"
+      [attr.aria-expanded]="menuAbierto"
+      (click)="menuAbierto = !menuAbierto">
+      <i class="fas" [ngClass]="menuAbierto ? 'fa-times' : 'fa-bars'"></i>
+    </button>
+
+    <nav class="nav-left" [class.menu-open]="menuAbierto">
+      <a routerLink="/mantenimientos" (click)="cerrarMenu()">Servicios</a>
+      <a routerLink="/catalogo" (click)="cerrarMenu()">Relojes</a>
+      <a routerLink="/nosotros" (click)="cerrarMenu()">Nuestra historia</a>
+    </nav>
+
+    <a routerLink="/" class="logo" aria-label="DRAKO, inicio">
+      <img src="../../../assets/drakologo.png" alt="">
+    </a>
+
+    <div class="nav-right">
+      <a [routerLink]="logueado ? '/misdatos' : '/login'" class="account-link" (click)="cerrarMenu()">Mi cuenta</a>
+
+      <a routerLink="/carrito" class="cart-link" aria-label="Ver carrito">
+        <i class="fas fa-shopping-bag"></i>
+      </a>
+    </div>
+
+  </div>
+</header>

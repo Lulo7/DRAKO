@@ -1,0 +1,26 @@
+.rejilla-dashboard {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.tarjeta-grafico.tarjeta-ancho {
+    grid-column: 1 / -1;
+}
+
+.contenedor-grafico {
+    position: relative;
+    height: 320px;
+}
+
+.tarjeta-ancho .contenedor-grafico {
+    height: 360px;
+}
+
+@media (max-width: 900px) {
+    .rejilla-dashboard {
+        grid-template-columns: 1fr;
+    }
+}

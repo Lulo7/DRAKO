@@ -1,0 +1,142 @@
+:host {
+    display: block;
+}
+
+.rejilla-cuenta {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.tarjeta-datos.tarjeta-ancho {
+    grid-column: 1 / -1;
+}
+
+.tarjeta-datos .form-group {
+    margin-bottom: 19px;
+}
+
+.tarjeta-datos .form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #4c4842;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.tarjeta-datos .form-control {
+    width: 100%;
+    height: 44px;
+    padding: 10px 13px;
+    border: 1px solid #dedad4;
+    border-radius: 0;
+    background: #fff;
+    color: #282622;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    box-shadow: none;
+}
+
+.tarjeta-datos .form-control:focus {
+    border-color: #a17c4b;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(161, 124, 75, 0.1);
+}
+
+.tarjeta-datos .form-control[readonly] {
+    background: #f6f5f2;
+    color: #817b73;
+}
+
+.listado-datos {
+    margin: 0;
+}
+
+.listado-datos > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 13px 0;
+    border-bottom: 1px solid #eeeae5;
+}
+
+.listado-datos > div:last-child {
+    border-bottom: none;
+}
+
+.listado-datos dt {
+    color: #817b73;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.listado-datos dd {
+    margin: 0;
+    color: #282622;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-align: right;
+    word-break: break-all;
+}
+
+.btn-subir {
+    margin-bottom: 22px;
+    cursor: pointer;
+}
+
+.listado-archivos {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #eeeae5;
+}
+
+.listado-archivos li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 2px;
+    border-bottom: 1px solid #eeeae5;
+}
+
+.listado-archivos .extension {
+    min-width: 44px;
+    padding: 5px 7px;
+    border: 1px solid #a17c4b;
+    color: #a17c4b;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.listado-archivos .nombrearchivo {
+    color: #4c4842;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.listado-archivos li.vacio {
+    padding: 26px 2px;
+    color: #928c84;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+}
+
+@media (max-width: 900px) {
+    .rejilla-cuenta {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,158 @@
+<app-header></app-header>
+
+<main class="cart-page">
+  <div class="container">
+    <div class="cart-heading">
+      <p class="eyebrow">DRAKO / TU SELECCIÓN</p>
+      <h1>Mi carrito</h1>
+      <p class="cart-subtitle">
+        Revisa tus relojes seleccionados antes de continuar.
+      </p>
+    </div>
+
+    <div class="cart-empty" *ngIf="!carrito.listacarrito || carrito.listacarrito.length === 0">
+      <div class="empty-icon">
+        <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+      </div>
+      <h2>Tu carrito está vacío</h2>
+      <p>Aún no has añadido ningún reloj a tu selección.</p>
+      <a routerLink="/catalogo" class="continue-button">
+        EXPLORAR RELOJES
+      </a>
+    </div>
+
+    <div class="cart-layout" *ngIf="carrito.listacarrito && carrito.listacarrito.length > 0">
+      <section class="cart-items" aria-label="Productos en el carrito">
+        <div class="cart-table-heading">
+          <span>Producto</span>
+          <span>Precio</span>
+          <span>Cantidad</span>
+          <span>Total</span>
+        </div>
+
+        <article class="cart-item" *ngFor="let item of carrito.listacarrito">
+          <div class="cart-product">
+            <a
+              class="cart-product-image"
+              [routerLink]="['/detalles', item.idproducto]"
+              [attr.aria-label]="'Ver ' + item.nombre">
+              <img
+                [src]="peticion.dominioavatar + '/Productos/' + item.idproducto + '.png?v=' + random"
+                [alt]="item.nombre || 'Reloj DRAKO'"
+                (error)="imagenNoDisponible($event)">
+            </a>
+
+            <div class="cart-product-info">
+              <p class="cart-brand">{{ item.marca || 'DRAKO' }}</p>
+              <h2>{{ item.nombre || 'Reloj' }}</h2>
+              <p class="cart-reference" *ngIf="item.codigo">
+                Ref. {{ item.codigo }}
+              </p>
+              <button
+                type="button"
+                class="remove-mobile"
+                (click)="Eliminar(item._id)">
+                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                Eliminar
+              </button>
+            </div>
+          </div>
+
+          <div class="cart-unit-price">
+            <span class="mobile-label">Precio</span>
+            <span>{{ item.precio | currency:'COP':'symbol':'1.0-0' }}</span>
+            <small *ngIf="item.descuento > 0">
+              -{{ item.descuento }}% de descuento
+            </small>
+          </div>
+
+          <div class="cart-quantity">
+            <span class="mobile-label">Cantidad</span>
+            <div class="quantity-control">
+              <button
+                type="button"
+                aria-label="Disminuir cantidad"
+                (click)="ModificarCantidad(item.idproducto, -1, item.cantidad, item._id)">
+                −
+              </button>
+
+              <span>{{ item.cantidad }}</span>
+
+              <button
+                type="button"
+                aria-label="Aumentar cantidad"
+                (click)="ModificarCantidad(item.idproducto, 1, item.cantidad, item._id)">
+                +
+              </button>
+            </div>
+          </div>
+
+          <div class="cart-line-total">
+            <span class="mobile-label">Total</span>
+            <strong>
+              {{
+                (item.precio - (item.precio * (item.descuento || 0) / 100)) * item.cantidad
+                  | currency:'COP':'symbol':'1.0-0'
+              }}
+            </strong>
+            <button
+              type="button"
+              class="remove-desktop"
+              (click)="Eliminar(item._id)">
+              <i class="fas fa-trash-alt" aria-hidden="true"></i>
+              Eliminar
+            </button>
+          </div>
+        </article>
+
+        <div class="cart-continue">
+          <a routerLink="/catalogo">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Seguir explorando
+          </a>
+        </div>
+      </section>
+
+      <aside class="cart-summary">
+        <h2>Resumen de compra</h2>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>{{ carrito.subtotal | currency:'COP':'symbol':'1.0-0' }}</span>
+        </div>
+
+        <div class="summary-row discount-row" *ngIf="carrito.descuentos > 0">
+          <span>Descuentos</span>
+          <span>
+            -{{ carrito.descuentos | currency:'COP':'symbol':'1.0-0' }}
+          </span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong>{{ carrito.grantotal | currency:'COP':'symbol':'1.0-0' }}</strong>
+        </div>
+
+        <p class="summary-note">
+          Los costos de envío y otros cargos, si aplican, se mostrarán durante el proceso de compra.
+        </p>
+
+        <button
+          type="button"
+          class="buy-button"
+          (click)="VerificarLogin()">
+          COMPRAR
+        </button>
+
+        <div class="secure-note">
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          Continuación segura de tu compra
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

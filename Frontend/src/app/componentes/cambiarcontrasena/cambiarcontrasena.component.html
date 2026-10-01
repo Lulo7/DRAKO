@@ -1,0 +1,57 @@
+<div class="contenedor">
+    <app-menulateral></app-menulateral>
+    <div class="areatrabajo pagina-admin">
+        <header class="encabezado-pagina">
+            <p class="eyebrow">MI CUENTA</p>
+            <h1>Cambiar contraseña</h1>
+            <p class="descripcion">Actualiza tu contraseña para mantener tu cuenta segura.</p>
+        </header>
+
+        <div class="rejilla-cuenta">
+            <div class="tarjeta-datos tarjeta-clave" id="restablerpass">
+                <p class="eyebrow">Seguridad</p>
+
+                <div class="form-group">
+                    <label for="passactual">Contraseña actual</label>
+                    <input type="password" class="form-control" id="passactual" [(ngModel)]="passactual"
+                        placeholder="Tu contraseña actual">
+                </div>
+
+                <div class="form-group">
+                    <label for="newpassword">Nueva contraseña</label>
+                    <input type="password" class="form-control" id="newpassword" [(ngModel)]="password"
+                        placeholder="Nueva contraseña">
+                    <div class="validar" [ngClass]="passwordRegex.test(password)?'ok':'fail'"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirma">Confirma la contraseña</label>
+                    <input type="password" class="form-control" id="confirma" [(ngModel)]="confirm"
+                        placeholder="Repite la nueva contraseña">
+                </div>
+
+                <div class="condiciones" [ngClass]="caracterRegex.test(password)?'ok':'fail'">Minimo 8 caracteres
+                </div>
+                <div class="condiciones" [ngClass]="mayusConRegex.test(password)?'ok':'fail'">Al menos 1 letra
+                    mayuscula</div>
+                <div class="condiciones" [ngClass]="numeroCondRegex.test(password)?'ok':'fail'">Al menos 1 numero</div>
+                <div class="condiciones" [ngClass]="especialRegex.test(password)?'ok':'fail'">Al menos 1 caracter
+                    especial de estos: #, $, %, *</div>
+
+                <button class="btn-admin btn-guardar" (click)="Restablecer()">Restablecer contraseña</button>
+            </div>
+
+            <div class="tarjeta-datos">
+                <p class="eyebrow">Recomendaciones</p>
+                <h2>Una contraseña segura</h2>
+                <ul class="listado-recomendaciones">
+                    <li>Combina letras mayúsculas y minúsculas.</li>
+                    <li>Incluye al menos un número.</li>
+                    <li>Usa caracteres especiales: #, $, % o *.</li>
+                    <li>Evita datos personales como tu nombre o fecha de nacimiento.</li>
+                    <li>No reutilices contraseñas de otras cuentas.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

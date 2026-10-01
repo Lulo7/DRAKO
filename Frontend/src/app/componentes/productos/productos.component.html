@@ -1,0 +1,205 @@
+<div class="contenedor">
+    <app-menulateral></app-menulateral>
+    <div class="areatrabajo pagina-admin">
+        <header class="encabezado-pagina">
+            <p class="eyebrow">ADMINISTRACIÓN</p>
+            <h1>Productos</h1>
+            <p class="descripcion">Catálogo de relojes: existencias, precios y descuentos vigentes.</p>
+        </header>
+
+        <div class="tabla-envoltura">
+            <table class="tabla-admin">
+                <thead>
+                    <tr>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Referencia</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Material</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Descuento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of datos" (click)="Editar(item._id)">
+                        <td>
+                            <img class="foto-fila"
+                                src="{{peticion.dominioavatar}}/Productos/{{item._id}}.png?v={{random}}"
+                                onerror="this.onerror=null; this.src='assets/default.png';" alt="Producto">
+                        </td>
+                        <td class="celda-codigo">{{item.codigo}}</td>
+                        <td class="celda-nombre">{{item.marca}}</td>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.material}}</td>
+                        <td class="celda-numero">{{item.cantidad}}</td>
+                        <td class="celda-numero">{{item.precio}}</td>
+                        <td class="celda-numero">{{item.descuento}}</td>
+                    </tr>
+                    <tr class="vacio" *ngIf="datos.length === 0">
+                        <td colspan="8">No hay productos en el catálogo. Crea el primero con el botón +.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btnNuevo" (click)="Nuevo()" role="button" title="Nuevo producto">+</div>
+    </div>
+</div>
+
+<div class="modal fade admin-modal" id="nuevoregistro" tabindex="-1" aria-labelledby="tituloModalProductos"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">REGISTRO</p>
+                    <h5 class="modal-title" id="tituloModalProductos">Producto</h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="imagenproducto">
+                    <img src="{{peticion.dominioavatar}}/Productos/{{idseleccionado}}.png?v={{random}}"
+                        onerror="this.onerror=null; this.src='assets/default.png';" alt="Foto del producto">
+                    <input type="file" id="upproducto" (change)="onFileSelect($event)" style="display: none;">
+                    <div id="cargarfoto" *ngIf="idseleccionado != ''">
+                        <label for="upproducto">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="basica-tab" data-toggle="tab" data-target="#basica"
+                            type="button" role="tab" aria-controls="basica" aria-selected="true">Configuración
+                            básica</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="fotos-tab" data-toggle="tab" data-target="#fotos" type="button"
+                            role="tab" aria-controls="fotos" aria-selected="false">Fotos</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="basica" role="tabpanel" aria-labelledby="basica-tab">
+
+                        <div class="row">
+                            <div class="form-group col-12 col-md-5">
+                                <label for="codigo">Referencia</label>
+                                <input type="text" class="form-control" id="codigo" [(ngModel)]="codigo"
+                                    [disabled]="idseleccionado != ''">
+                            </div>
+                            <div class="form-group col-12 col-md-7">
+                                <label for="marca">Marca</label>
+                                <input type="text" class="form-control" id="marca" [(ngModel)]="marca">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="movimiento">Movimiento</label>
+                                <input type="text" class="form-control" id="movimiento" [(ngModel)]="movimiento">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="calibre">Calibre</label>
+                                <input type="text" class="form-control" id="calibre" [(ngModel)]="calibre">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="indicacion">Indicación</label>
+                                <input type="text" class="form-control" id="indicacion" [(ngModel)]="indicacion">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6">
+                                <label for="material">Material</label>
+                                <input type="text" class="form-control" id="material" [(ngModel)]="material">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="pulso">Pulso</label>
+                                <input type="text" class="form-control" id="pulso" [(ngModel)]="pulso">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="caja">Caja</label>
+                                <input type="text" class="form-control" id="caja" [(ngModel)]="caja">
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="departamento">Departamento</label>
+                                <input type="text" class="form-control" id="departamento" [(ngModel)]="departamento">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="descripcion">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" [(ngModel)]="descripcion">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12 col-md-4">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="text" class="form-control" id="cantidad" [(ngModel)]="cantidad">
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <label for="precio">Precio</label>
+                                <input type="text" class="form-control" id="precio" [(ngModel)]="precio">
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <label for="descuento">Descuento</label>
+                                <input type="text" class="form-control" id="descuento" [(ngModel)]="descuento">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="fotos" role="tabpanel" aria-labelledby="fotos-tab">
+
+                        <div class="zonafotos">
+                            <ng-container *ngFor="let item of datosimagenes">
+                                <div class="imgagregada">
+                                    <img src="{{peticion.dominioavatar}}/Relojes/{{item.nombre}}.png?v={{random2}}"
+                                        [alt]="'Imagen agregada'" (error)="imagenNoDisponible($event)">
+                                    <div class="rmimage" (click)="RemoverImagen(item._id)" title="Quitar imagen">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="sin-fotos" *ngIf="datosimagenes.length === 0">
+                                Este producto todavía no tiene imágenes adicionales.
+                            </div>
+                        </div>
+
+                        <div class="agregarfoto">
+                            <input type="file" id="addimageproduct" (change)="AgregarImagen($event)"
+                                style="display: none;">
+                            <label for="addimageproduct">
+                                <i class="fas fa-camera"></i>
+                                AGREGAR FOTO
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="Guardar()"
+                    *ngIf="idseleccionado == ''">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="Actualizar()"
+                    *ngIf="idseleccionado != ''">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="Eliminar()"
+                    *ngIf="idseleccionado != ''">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

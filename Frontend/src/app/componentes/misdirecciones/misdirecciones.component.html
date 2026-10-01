@@ -1,0 +1,106 @@
+<div class="contenedor">
+    <app-menulateral></app-menulateral>
+    <div class="areatrabajo pagina-admin">
+        <header class="encabezado-pagina">
+            <p class="eyebrow">MI CUENTA</p>
+            <h1>Mis direcciones</h1>
+            <p class="descripcion">Direcciones de envío guardadas para tus compras.</p>
+        </header>
+
+        <div class="container">
+            <section class="checkout-panel address-panel">
+
+                <div class="no-addresses" *ngIf="datosDirecciones.length === 0">
+                    <div class="empty-icon">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    </div>
+                    <h4>Aún no tienes direcciones guardadas</h4>
+                    <p>Agrega una dirección para indicar dónde recibir tu pedido.</p>
+
+                </div>
+
+                <div class="address-list" *ngIf="datosDirecciones.length > 0">
+                    <label class="address-card" *ngFor="let item of datosDirecciones" (click)="Editar(item._id)"
+                        [class.selected]="idseleccionado === item._id">
+                        <input type="" name="direccionEntrega" [value]="item._id" [(ngModel)]="idseleccionado" />
+
+                        <span class="address-content">
+                            <span class="address-alias">
+                                {{ item.alias || 'Mi dirección' }}
+                            </span>
+
+                            <span class="address-line">
+                                {{ item.direccion }}
+                            </span>
+
+                            <span class="address-location">
+                                {{ item.municipio }}, {{ item.departamento }}
+                            </span>
+
+                            <span class="address-postal" *ngIf="item.codigopostal">
+                                Código postal: {{ item.codigopostal }}
+                            </span>
+                        </span>
+
+                        <i class="fas fa-map-marker-alt address-icon" aria-hidden="true"></i>
+                    </label>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="btnNuevo" (click)="Nuevo()" role="button" title="Nueva dirección">+</div>
+    </div>
+</div>
+
+<div class="modal fade admin-modal" id="nuevoregistro" tabindex="-1" aria-labelledby="tituloModalDirecciones"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">REGISTRO</p>
+                    <h5 class="modal-title" id="tituloModalDirecciones">Dirección</h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="codigo">Código</label>
+                    <input type="text" class="form-control" id="codigo" [(ngModel)]="codigo"
+                        [disabled]="idseleccionado != ''">
+                </div>
+                <div class="form-group">
+                    <label for="departamento">Departamento</label>
+                    <input type="text" class="form-control" id="departamento" [(ngModel)]="departamento">
+                </div>
+                <div class="form-group">
+                    <label for="municipio">Municipio</label>
+                    <input type="text" class="form-control" id="municipio" [(ngModel)]="municipio">
+                </div>
+                <div class="form-group">
+                    <label for="codigopostal">Código postal</label>
+                    <input type="text" class="form-control" id="codigopostal" [(ngModel)]="codigopostal">
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" [(ngModel)]="direccion">
+                </div>
+                <div class="form-group">
+                    <label for="alias">Alias</label>
+                    <input type="text" class="form-control" id="alias" [(ngModel)]="alias">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="Guardar()"
+                    *ngIf="idseleccionado == ''">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="Actualizar()"
+                    *ngIf="idseleccionado != ''">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="Eliminar()"
+                    *ngIf="idseleccionado != ''">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

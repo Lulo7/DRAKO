@@ -1,0 +1,64 @@
+<div class="contenedor">
+    <app-menulateral></app-menulateral>
+    <div class="areatrabajo pagina-admin">
+        <header class="encabezado-pagina">
+            <p class="eyebrow">MI CUENTA</p>
+            <h1>Mis datos</h1>
+            <p class="descripcion">Información personal asociada a tu cuenta DRAKO.</p>
+        </header>
+
+        <div class="rejilla-cuenta">
+            <section class="tarjeta-datos">
+                <p class="eyebrow">Perfil</p>
+                <div class="form-group">
+                    <label for="misnombre">Nombre completo</label>
+                    <input id="misnombre" type="text" class="form-control" [(ngModel)]="nombre"
+                        placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="misemail">Correo electrónico</label>
+                    <input id="misemail" type="email" class="form-control" [value]="email" readonly>
+                </div>
+                <button type="button" class="btn-admin" (click)="ActualizarMisDatos()">Guardar cambios</button>
+            </section>
+
+            <section class="tarjeta-datos">
+                <p class="eyebrow">Estado de la cuenta</p>
+                <dl class="listado-datos">
+                    <div>
+                        <dt>Correo</dt>
+                        <dd>{{email}}</dd>
+                    </div>
+                    <div>
+                        <dt>Rol</dt>
+                        <dd>{{rol}}</dd>
+                    </div>
+                    <div>
+                        <dt>Estado</dt>
+                        <dd>{{estado}}</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="tarjeta-datos tarjeta-ancho">
+                <p class="eyebrow">Documentos</p>
+                <h2>Mis archivos</h2>
+
+                <label class="btn-admin btn-subir" for="misarchivo">Subir archivo</label>
+                <input id="misarchivo" type="file" (change)="onFileSelect($event)" style="display: none;">
+
+                <ul class="listado-archivos">
+                    <ng-container *ngIf="datosarchivos.length > 0">
+                        <li *ngFor="let arch of datosarchivos">
+                            <span class="extension">{{arch.extension}}</span>
+                            <span class="nombrearchivo">{{arch.nombre}}</span>
+                        </li>
+                    </ng-container>
+                    <li class="vacio" *ngIf="!datosarchivos.length">
+                        Aún no has subido archivos a tu cuenta.
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<div class="container">
+    <div id="solicitarcodigo">
+        <h3>Restablecer contraseña</h3>
+
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email">
+        </div>
+
+        <div class="form-group">
+            <label for="codigo">Código de recuperación</label>
+            <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="codigo" placeholder="REC-">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Nueva contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password">
+            <div class="validar" [ngClass]="passwordRegex.test(password) ? 'ok' : 'fail'"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirma">Confirmar contraseña</label>
+            <input type="password" class="form-control" id="confirma" name="confirma" [(ngModel)]="confirma">
+        </div>
+
+        <div class="condiciones" [ngClass]="caracterRegex.test(password) ? 'ok' : 'fail'">
+            Mínimo 8 caracteres
+        </div>
+
+        <div class="condiciones" [ngClass]="mayusConRegex.test(password) ? 'ok' : 'fail'">
+            Al menos 1 letra mayúscula
+        </div>
+
+        <div class="condiciones" [ngClass]="numeroCondRegex.test(password) ? 'ok' : 'fail'">
+            Al menos 1 número
+        </div>
+
+        <div class="condiciones" [ngClass]="especialRegex.test(password) ? 'ok' : 'fail'">
+            Al menos 1 carácter especial de estos: #, $, %, *
+        </div>
+
+        <a class="enlace-login" routerLink="/login">
+            Iniciar sesión
+        </a>
+
+        <div id="turnstile"></div>
+
+        <button type="button" class="btn btn-primary mt-2" (click)="Recuperar()">
+            Restablecer contraseña
+        </button>
+    </div>
+</div>
+
+<app-footer></app-footer>

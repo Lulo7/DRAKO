@@ -1,0 +1,110 @@
+<app-header></app-header>
+
+<main class="catalog-page">
+    <section class="catalog-hero">
+        <div class="catalog-hero-content">
+            <p class="eyebrow">COLECCIÓN DRAKO</p>
+            <h1>Encuentra tu próximo reloj.</h1>
+            <p>
+                Explora nuestra selección de relojes y encuentra el diseño
+                que acompañará tus momentos.
+            </p>
+        </div>
+    </section>
+
+    <section class="catalog-container container">
+        <div class="catalog-heading">
+            <div>
+                <p class="eyebrow">NUESTRA SELECCIÓN</p>
+                <h2>Todos los relojes</h2>
+            </div>
+
+            <span class="results-count">
+                {{ productosFiltrados.length }} productos
+            </span>
+        </div>
+
+        <div class="catalog-filters">
+            <div class="search-box">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="search" [(ngModel)]="busqueda" placeholder="Buscar por nombre, marca o referencia"
+                    aria-label="Buscar productos">
+            </div>
+
+            <div class="brand-filter">
+                <label for="filtroMarca">Marca</label>
+                <select id="filtroMarca" class="form-control" [(ngModel)]="marcaSeleccionada">
+                    <option *ngFor="let marca of marcas" [ngValue]="marca">
+                        {{ marca }}
+                    </option>
+                </select>
+            </div>
+
+            <button type="button" class="clear-filters" (click)="limpiarFiltros()">
+                Limpiar filtros
+            </button>
+        </div>
+
+        <div class="catalog-state" *ngIf="cargando">
+            <div class="loading-spinner"></div>
+            <p>Cargando relojes...</p>
+        </div>
+
+        <div class="catalog-state error-state" *ngIf="!cargando && errorCarga">
+            <h3>No pudimos cargar el catálogo</h3>
+            <p>Comprueba tu conexión e inténtalo de nuevo.</p>
+            <button type="button" class="retry-button" (click)="CargarTodos()">
+                Reintentar
+            </button>
+        </div>
+
+        <div class="catalog-state" *ngIf="!cargando && !errorCarga && productosFiltrados.length === 0">
+            <h3>No encontramos relojes</h3>
+            <p>Prueba con otro término o limpia los filtros.</p>
+            <button type="button" class="retry-button" (click)="limpiarFiltros()">
+                Limpiar filtros
+            </button>
+        </div>
+
+        <div class="product-grid" *ngIf="!cargando && !errorCarga && productosFiltrados.length > 0">
+
+            <article class="catalog-product" *ngFor="let item of productosFiltrados">
+                <a class="product-image" [routerLink]="['/detalles', item._id]"
+                    [attr.aria-label]="'Ver detalles de ' + item.nombre">
+
+                    <img [src]="peticion.dominioavatar + '/Productos/' + item._id + '.png?v=' + random"
+                        [alt]="item.nombre || 'Reloj DRAKO'" loading="lazy" (error)="imagenNoDisponible($event)">
+
+                    <span class="image-action">VER DETALLES</span>
+                </a>
+
+                <div class="product-info">
+                    <p class="product-brand">{{ item.marca || 'DRAKO' }}</p>
+
+                    <h3>
+                        <a [routerLink]="['/detalles', item._id]">
+                            {{ item.nombre || 'Reloj sin nombre' }}
+                        </a>
+                    </h3>
+
+                    <p class="product-reference" *ngIf="item.codigo">
+                        Ref. {{ item.codigo }}
+                    </p>
+
+                    <div class="product-card-bottom">
+                        <span class="product-price">
+                            {{ item.precio | currency:'COP':'symbol':'1.0-0' }}
+                        </span>
+
+                        <a class="details-link" type="button" (click)="AddCar(item._id)" aria-label="Ver detalles">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>

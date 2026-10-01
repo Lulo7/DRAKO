@@ -1,0 +1,242 @@
+.menu {
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #282622;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    border-right: 1px solid #3a372f;
+    box-shadow: 6px 0 24px rgba(36, 33, 29, 0.12);
+}
+
+.usuario {
+    position: relative;
+    padding: 40px 22px 26px;
+    text-align: center;
+    border-bottom: 1px solid #3a372f;
+}
+
+.usuario img {
+    display: block;
+    width: 86px;
+    height: 86px;
+    margin: 0 auto;
+    border: 1px solid #a17c4b;
+    background: #312e28;
+    object-fit: cover;
+}
+
+div#cargarfoto {
+    position: absolute;
+    top: 108px;
+    left: calc(50% + 22px);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #282622;
+    background: #a17c4b;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+div#cargarfoto:hover {
+    background: #fff;
+    color: #282622;
+}
+
+div#cargarfoto label {
+    cursor: pointer;
+}
+
+.lblnombre {
+    margin-top: 18px;
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lblrol {
+    margin-top: 7px;
+    color: #a17c4b;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.tiempo {
+    margin-top: 11px;
+    color: #817b73;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+}
+
+.opciones {
+    flex: 1;
+    margin-top: 16px;
+    padding: 0 14px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+}
+
+.itemopciones {
+    padding: 14px 16px;
+    border-left: 2px solid transparent;
+    color: #c9c4bc;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.itemopciones:hover {
+    background: #312e28;
+    border-left-color: #a17c4b;
+    color: #fff;
+}
+
+.itemopciones.activo {
+    background: #f6f5f2;
+    border-left-color: #a17c4b;
+    color: #282622;
+}
+
+.itemopciones:last-child {
+    margin-top: auto;
+    color: #c65d56;
+}
+
+.itemopciones:last-child:hover {
+    background: rgba(179, 78, 72, 0.16);
+    border-left-color: #b34e48;
+    color: #e08a84;
+}
+
+/* =========================================================
+   Móvil: el menú lateral pasa a barra superior
+   ========================================================= */
+@media (max-width: 900px) {
+    :host {
+        display: block;
+        width: 100%;
+    }
+
+    .menu {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        flex-direction: column;
+        border-right: none;
+        border-bottom: 1px solid #3a372f;
+        box-shadow: 0 6px 20px rgba(36, 33, 29, 0.14);
+    }
+
+    .usuario {
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        column-gap: 14px;
+        row-gap: 3px;
+        align-items: center;
+        padding: 14px 16px;
+        text-align: left;
+    }
+
+    .usuario img {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+        width: 56px;
+        height: 56px;
+        margin: 0;
+    }
+
+    div#cargarfoto {
+        position: static;
+        grid-column: 3;
+        grid-row: 1 / span 3;
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    .lblnombre {
+        grid-column: 2;
+        grid-row: 1;
+        margin-top: 0;
+        font-size: 16px;
+    }
+
+    .lblrol {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 0;
+    }
+
+    .tiempo {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 0;
+    }
+
+    .opciones {
+        flex: none;
+        flex-direction: row;
+        gap: 0;
+        margin-top: 0;
+        padding: 0 6px;
+        border-top: 1px solid #3a372f;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+    }
+
+    .opciones::-webkit-scrollbar {
+        display: none;
+    }
+
+    .itemopciones {
+        flex: 0 0 auto;
+        padding: 15px 14px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+    }
+
+    .itemopciones:hover {
+        background: transparent;
+        border-bottom-color: #a17c4b;
+        color: #fff;
+    }
+
+    .itemopciones.activo {
+        background: transparent;
+        border-bottom-color: #a17c4b;
+        color: #a17c4b;
+    }
+
+    .itemopciones:last-child {
+        margin-top: 0;
+        border-bottom-color: transparent;
+    }
+
+    .itemopciones:last-child:hover {
+        background: transparent;
+        border-bottom-color: #b34e48;
+        color: #e08a84;
+    }
+}

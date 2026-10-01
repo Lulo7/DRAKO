@@ -1,0 +1,125 @@
+<app-header></app-header>
+
+<main class="contact-page">
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <p class="eyebrow">ESTAMOS PARA AYUDARTE</p>
+      <h1>Hablemos de tu próximo reloj.</h1>
+      <p>
+        ¿Tienes alguna pregunta sobre nuestros productos o necesitas ayuda
+        con tu compra? Nos encantará atenderte.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-content container">
+    <div class="contact-intro">
+      <p class="eyebrow">CONTACTO DRAKO</p>
+      <h2>¿Cómo podemos ayudarte?</h2>
+      <p>
+        Escríbenos tu consulta y pronto podremos orientarte. También puedes
+        consultar las opciones de contacto que se publiquen en esta página.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <section class="contact-form-card">
+        <h3>Envíanos un mensaje</h3>
+        <p class="form-description">
+          Completa los campos para preparar tu consulta.
+        </p>
+
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              class="form-control"
+              placeholder="Tu nombre"
+              autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input
+              id="correo"
+              name="correo"
+              type="email"
+              class="form-control"
+              placeholder="nombre@correo.com"
+              autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="asunto">Asunto</label>
+            <select id="asunto" name="asunto" class="form-control">
+              <option value="" selected disabled>Selecciona un tema</option>
+              <option value="productos">Información sobre un producto</option>
+              <option value="pedido">Consulta sobre un pedido</option>
+              <option value="garantia">Garantía y servicio</option>
+              <option value="otro">Otro asunto</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              class="form-control"
+              rows="5"
+              placeholder="Cuéntanos cómo podemos ayudarte"></textarea>
+          </div>
+
+          <button type="button" class="send-button" disabled>
+            ENVÍO DE MENSAJES PRÓXIMAMENTE
+          </button>
+
+          <p class="form-note">
+            El formulario aún no está conectado al servicio de envío.
+          </p>
+        </form>
+      </section>
+
+      <aside class="contact-side">
+        <div class="contact-side-heading">
+          <p class="eyebrow">ATENCIÓN AL CLIENTE</p>
+          <h3>Estamos aquí para ti.</h3>
+          <p>
+            Próximamente publicaremos nuestros canales de atención y horarios
+            para que puedas comunicarte directamente con nuestro equipo.
+          </p>
+        </div>
+
+        <div class="contact-note">
+          <span class="note-icon">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+          </span>
+          <div>
+            <h4>Horarios de atención</h4>
+            <p>Información disponible próximamente.</p>
+          </div>
+        </div>
+
+        <div class="contact-note">
+          <span class="note-icon">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </span>
+          <div>
+            <h4>Correo electrónico</h4>
+            <p>Canal de contacto por confirmar.</p>
+          </div>
+        </div>
+
+        <div class="contact-side-footer">
+          <span>DRAKO</span>
+          <p>Precisión, diseño y atención en cada detalle.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

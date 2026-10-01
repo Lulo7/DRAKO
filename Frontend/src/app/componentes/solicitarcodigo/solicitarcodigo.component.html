@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<div class="container">
+    <div id="solicitarcodigo">
+        <div class="form-group">
+            <h3>Solicitar código de recuperación</h3>
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email"
+                placeholder="Ingresa tu correo">
+
+            <a class="enlace-login" routerLink="/login">
+                Iniciar sesión
+            </a>
+
+            <div id="turnstile"></div>
+
+            <button type="button" class="btn btn-primary mt-2" (click)="solicitarCodigo()">
+                Solicitar código
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

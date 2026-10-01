@@ -1,0 +1,33 @@
+<div class="menu">
+    <div class="usuario">
+        <img src="{{_id != '' ? peticion.dominioavatar + '/Avatares/' + _id + '.png?v=' + random : 'assets/avatar.png'}}"
+        onerror="this.onerror=null; this.src='assets/avatar.png';" alt="Avatar">
+
+        <input type="file" id="upimage" (change)="onFileSelect($event)" style="display: none;">
+        <div id="cargarfoto">
+            <label for="upimage">
+                <i class="fas fa-camera"></i>
+            </label>
+        </div>
+
+        <div class="lblnombre">{{nombre}}</div>
+        <div class="lblrol">{{nombrerol}}</div>
+        <div class="tiempo">{{hora}} Minutos</div>
+    </div>
+
+    <div class="opciones">
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/dashboard" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}">Dashboard</div>
+        <div class="itemopciones" routerLink="/misdatos" routerLinkActive="activo">Mis Datos</div>
+        <div class="itemopciones" routerLink="/misdirecciones" routerLinkActive="activo">Mis Direcciones</div>
+        <div class="itemopciones" routerLink="/cambiarcontrasena" routerLinkActive="activo">Cambiar Contraseña</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/roles" routerLinkActive="activo">Roles</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/apis" routerLinkActive="activo">Apis</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/asignacion" routerLinkActive="activo">Asignacion</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/usuarios" routerLinkActive="activo">Usuarios</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/tags" routerLinkActive="activo">Tags</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/productos" routerLinkActive="activo">Productos</div>
+        <div class="itemopciones" *ngIf="nombrerol == 'Administrador'" routerLink="/servicios" routerLinkActive="activo">Servicios</div>
+        <div class="itemopciones" routerLink="/">Volver a la tienda</div>
+        <div class="itemopciones" (click)="Logout()">Cerrar Sesion</div>
+    </div>
+</div>
