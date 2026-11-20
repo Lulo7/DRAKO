@@ -27,7 +27,7 @@ The project integrates a frontend built with Angular and a backend developed wit
 
 It was designed to provide an integrated shopping experience, combining product management, user authentication, shopping cart functionality and product administration.
 
-##Screenshots
+## Screenshots
 
 ![DRAKO - Página principal](./assets/Portada.png)
 ![DRAKO - Página principal](./assets/Login.png)
