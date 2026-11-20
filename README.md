@@ -29,6 +29,11 @@ It was designed to provide an integrated shopping experience, combining product 
 
 ##Screenshots
 
+![DRAKO - Página principal](./assets/Portada.png)
+![DRAKO - Página principal](./assets/Login.png)
+![DRAKO - Página principal](./assets/Registro.png)
+![DRAKO - Página principal](./assets/Carrito.png)
+![DRAKO - Página principal](./assets/Administracion.png)
 
 ## Features
 
