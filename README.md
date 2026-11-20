@@ -1,61 +1,164 @@
-# DRAKO
+# DRAKO — Full Stack Watch Store
 
-Tienda/CRUD fullstack construida con **Angular 17** en el frontend y **Express 5 + MongoDB** en el backend.
+<p align="center">
+  A full stack e-commerce application designed for the commercialization and management of watches.
+</p>
 
-## Estructura del proyecto
+<p align="center">
+  Built with Angular 17, Node.js, Express 5 and MongoDB.
+</p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-17-DD0031?logo=angular&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express-000000?logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white" />
+</p>
+
+---
+
+## About the Project
+
+DRAKO is a full stack e-commerce application developed for the commercialization of watches.
+
+The project integrates a frontend built with Angular and a backend developed with Node.js and Express, using MongoDB for data persistence.
+
+It was designed to provide an integrated shopping experience, combining product management, user authentication, shopping cart functionality and product administration.
+
+##Screenshots
+
+
+## Features
+
+- User registration and authentication.
+- User account management.
+- Product catalog and product filtering.
+- Product details.
+- Shopping cart management.
+- Product image upload and administration.
+- REST API integration.
+- Database management with MongoDB.
+
+## Technologies
+
+### Frontend
+
+- Angular 17
+- TypeScript
+- HTML5
+- CSS3
+- Bootstrap
+
+### Backend
+
+- Node.js
+- Express 5
+- JavaScript
+- Mongoose
+- REST APIs
+
+### Database
+
+- MongoDB
+
+### Development and Testing
+
+- Git
+- GitHub
+- Karma
+- Jasmine
+
+### Deployment
+
+- DigitalOcean Droplets
+
+## Project Architecture
+
+DRAKO follows a client-server architecture, separating the frontend application from the backend API.
+
+```text
+                 DRAKO
+                   |
+          +--------+--------+
+          |                 |
+       Frontend           Backend
+       Angular             Express
+          |                 |
+          |             Controllers
+          |                 |
+          |               Models
+          |                 |
+          +---- REST API ---+
+                            |
+                         MongoDB
 ```
+
+## Project Structure
+
+```text
 DRAKO/
-├── Frontend/          # Angular 17 (Angular CLI)
-├── Backend/           # API Express 5
+│
+├── Frontend/
+│   └── Angular application
+│
+├── Backend/
 │   ├── apis/
 │   │   ├── controladores/
-│   │   └── modelos/    # Modelos Mongoose
-│   ├── middleware/     # Middlewares de sesión y roles
+│   │   └── modelos/
+│   │
+│   ├── middleware/
 │   ├── utils/
-│   ├── config.js      # Configuración local (NO versionada)
-│   ├── app.js         # Punto de entrada
-│   └── routes.js      # Definición de rutas
-└── .gitignore
+│   ├── app.js
+│   ├── routes.js
+│   └── config.example.js
+│
+├── .gitignore
+└── README.md
 ```
 
-## Requisitos
+## Requirements
 
-- Node.js 18 o superior
-- MongoDB (local o remoto)
+Before running the project, make sure you have installed:
 
-## Instalación
+- Node.js 18 or higher.
+- npm.
+- MongoDB (local or remote).
 
-### 1. Backend
+## Installation and Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Lulo7/DRAKO.git
+cd DRAKO
+```
+
+### 2. Backend Setup
 
 ```bash
 cd Backend
 npm install
 ```
 
-Copia el archivo de ejemplo de configuración y complétalo:
+Create your local configuration file using the provided example:
 
 ```bash
-copy config.example.js config.js
+cp config.example.js config.js
 ```
 
-| Variable | Descripción |
-|---|---|
-| `config.bd.*` | IP, puerto y nombre de la base de datos MongoDB |
-| `config.mail.*` | Credenciales SMTP para envío de correos |
-| `config.secret` | Secreto para firmar contraseñas y sesiones |
-| `config.turnstile.secret` | Secreto de Cloudflare Turnstile |
-| `config.whitelist` | Orígenes permitidos (CORS) |
-| `config.puerto` | Puerto del servidor (por defecto 3001) |
-| `config.expiracion` | Duración de la sesión en milisegundos |
+Configure the required database, email, security, Cloudflare Turnstile and application settings in `config.js`.
 
-Arranca el servidor:
+Start the backend:
 
 ```bash
 npm start
 ```
 
-### 2. Frontend
+### 3. Frontend Setup
+
+Open another terminal:
 
 ```bash
 cd Frontend
@@ -63,18 +166,44 @@ npm install
 npm start
 ```
 
-La aplicación queda disponible en `http://localhost:4200`.
+The Angular development server will be available at:
 
-## Scripts disponibles
+```text
+http://localhost:4200
+```
 
-| Carpeta | Comando | Descripción |
-|---|---|---|
-| Backend | `npm start` | Inicia el servidor (`node app.js`) |
-| Frontend | `npm start` | `ng serve` en desarrollo |
-| Frontend | `npm run build` | Build de producción en `dist/` |
-| Frontend | `npm run watch` | Build en watch (desarrollo) |
-| Frontend | `npm test` | Tests unitarios (Karma/Jasmine) |
+## Available Scripts
 
-## Licencia
+### Backend
 
-ISC
+| Command | Description |
+|---|---|
+| `npm start` | Starts the Express server |
+
+### Frontend
+
+| Command | Description |
+|---|---|
+| `npm start` | Starts the Angular development server |
+| `npm run build` | Builds the application for production |
+| `npm run watch` | Builds the application in watch mode |
+| `npm test` | Runs unit tests using Karma and Jasmine |
+
+## Security
+
+Sensitive configuration values must remain in the local configuration file and must never be committed to the repository.
+
+Use `config.example.js` as a reference when configuring your local environment.
+
+## Developer
+
+**Javier Alejandro Gallo Lozano**
+
+Full Stack Developer | Backend Developer
+
+- GitHub: [@Lulo7](https://github.com/Lulo7)
+- LinkedIn: [Alejandro Gallo](https://linkedin.com/in/alejandro-gallo-webdeveloper/)
+
+## License
+
+This project is licensed under the ISC License.
